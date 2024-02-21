@@ -1,24 +1,61 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+var count=1
+function App(){
+  var [todo,setTodo]=useState([])
+  const addTodo=()=>{
+    console.log("Add todo")
+   const todoText= document.getElementById("todoInput").value
+   let todoObject={
+    id: count++,
+    title:todoText
+   }
+   console.log("todoText:"+todoText)
+   todo.push(todoText)
+   setTodo([...todo])
+   console.log("Length:"+todo.length)
 
-function App() {
+
+    //todoArray.push()
+  }
+  // const getDynamicList=()=>{
+  //    let response=""
+  //    for(let count=0;count<todo.length;count++){
+  //     response=<div>{todo{count}}</div>
+  //    }
+  //    return response
+  // }
+  const deleteTodo=(id)=>{
+     console.log("Delete Todo:",id)
+     todo=todo.filter(tempTodo=>{
+      if(id===tempTodo.id){
+        return false
+      }
+      else{
+        return true
+      }
+     })
+     setTodo([...todo])
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   
+    <div>
+      <h1>Todo App</h1>
+      <input  id="todoInput" type="text" placeholder="Add your todo here"></input>
+      <button onClick={addTodo}>Add</button>
+      {todo.map(tempTodo=>{
+        console.log("tempTodo:",tempTodo)
+        return <div>
+          {tempTodo}
+          <button onClick={()=>deleteTodo(tempTodo.id)}>Delete</button>
+          </div>
+      })}
+     
+
     </div>
+
   );
 }
 
