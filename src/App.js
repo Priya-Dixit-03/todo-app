@@ -6,53 +6,45 @@ function App(){
   var [todo,setTodo]=useState([])
   const addTodo=()=>{
     console.log("Add todo")
-   const todoText= document.getElementById("todoInput").value
+   const todoText= document.getElementById('todoInput').value
    let todoObject={
-    id: count++,
+    id:count++,
     title:todoText
    }
-   console.log("todoText:"+todoText)
-   todo.push(todoText)
-   setTodo([...todo])
-   console.log("Length:"+todo.length)
-
-
-    //todoArray.push()
+   console.log(todoText)
+   todo.push(todoObject)
+  // setTodo([...todo])
+    
   }
-  // const getDynamicList=()=>{
-  //    let response=""
-  //    for(let count=0;count<todo.length;count++){
-  //     response=<div>{todo{count}}</div>
-  //    }
-  //    return response
-  // }
+  console.log("length of todo",todo.length)
   const deleteTodo=(id)=>{
-     console.log("Delete Todo:",id)
-     todo=todo.filter(tempTodo=>{
-      if(id===tempTodo.id){
-        return false
-      }
-      else{
-        return true
-      }
-     })
-     setTodo([...todo])
+     console.log("Delete Todo is Called:",id)
+     todo=todo.filter(todoTemp=>
+      {
+        if(id===todoTemp.id){
+      return false
+        }
+        else{
+          return  true
+        }
+      })
+      setTodo([...todo])
   }
-  
+
   return (
    
     <div>
       <h1>Todo App</h1>
-      <input  id="todoInput" type="text" placeholder="Add your todo here"></input>
+      <input id="todoInput" type='text' placeholder='Add your todo here'></input>
       <button onClick={addTodo}>Add</button>
-      {todo.map(tempTodo=>{
-        console.log("tempTodo:",tempTodo)
-        return <div>
-          {tempTodo}
-          <button onClick={()=>deleteTodo(tempTodo.id)}>Delete</button>
-          </div>
-      })}
-     
+      {todo.map(todoTemp=>
+        {
+          return <div>
+            {todoTemp.title}
+            <button onClick={()=>deleteTodo(todoTemp.id)}>Delete</button>
+            </div>
+        })}
+
 
     </div>
 
@@ -60,3 +52,5 @@ function App(){
 }
 
 export default App;
+
+
